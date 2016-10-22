@@ -3,9 +3,18 @@ package br.com.caelum.agiletickets.models;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
+
+import org.joda.time.Days;
+import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
+import org.junit.Assert;
 import org.junit.Test;
 
+
 public class EspetaculoTest {
+
+	private Espetaculo espetaculo;
 
 	@Test
 	public void deveInformarSeEhPossivelReservarAQuantidadeDeIngressosDentroDeQualquerDasSessoes() {
@@ -80,5 +89,33 @@ public class EspetaculoTest {
 
 		return sessao;
 	}
+	
+	@Test
+	public void DeveInformarPrimeiraSessaoDisponivel(){
+		Espetaculo espetaculo = new Espetaculo();
+		LocalDate iniciosessao = new LocalDate().withDayOfMonth(9).withMonthOfYear(1).withYear(2016);
+		LocalDate finalsessao = new LocalDate().withDayOfMonth(9).withMonthOfYear(1).withYear(2016);
+		LocalTime horaespetaculo = new LocalTime().withHourOfDay(17);
+		
+		
+		List<Sessao> sessoes = espetaculo.criaSessoes(iniciosessao, finalsessao, horaespetaculo, Periodicidade.DIARIA);
+		
+		Assert.assertEquals(9, sessoes.get(0).getInicio().getDayOfMonth());
+		Assert.assertEquals(1, sessoes.get(0).getInicio().getMonthOfYear());
+		Assert.assertEquals(2016, sessoes.get(0).getInicio().getYear());
+		Assert.assertEquals(17, sessoes.get(0).getInicio().getHourOfDay());
+	}
+	
+	@Test
+	public void DeveInformarPrimeiraESegundaSessoesDisponiveis(){
+		Espetaculo espetaculo = new Espetaculo();
+		LocalDate iniciosessao = new LocalDate().withDayOfMonth(9).withMonthOfYear(1).withYear(2016);
+		LocalDate finalsessao = new LocalDate().withDayOfMonth(16).withMonthOfYear(1).withYear(2016);
+		LocalTime horaespetaculo = new LocalTime().withHourOfDay(17);
+		
+		
+		espetaculo.criaSessoes(iniciosessao, finalsessao, horaespetaculo, Periodicidade.SEMANAL);
+	}
+	
 	
 }
