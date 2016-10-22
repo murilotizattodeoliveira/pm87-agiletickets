@@ -104,10 +104,21 @@ public class Espetaculo {
 		ArrayList<Sessao> sessoes = new ArrayList<Sessao>();
 		Sessao sessao = new Sessao();
 		DateTime inicioDaSessao = inicio.toDateTime(horario);
+
 		sessao.setInicio(inicioDaSessao);
+		
 		
 		sessoes.add(sessao);
 		
+		Sessao sessao1 = new Sessao();
+		DateTime inicioDaSessao1 = fim.toDateTime(horario);
+
+		sessao1.setInicio(inicioDaSessao1);
+		
+		
+		sessoes.add(sessao1);
+		
+					
 		return sessoes;
 	}
 	

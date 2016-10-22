@@ -114,7 +114,11 @@ public class EspetaculoTest {
 		LocalTime horaespetaculo = new LocalTime().withHourOfDay(17);
 		
 		
-		espetaculo.criaSessoes(iniciosessao, finalsessao, horaespetaculo, Periodicidade.SEMANAL);
+		List<Sessao> sessoes = espetaculo.criaSessoes(iniciosessao, finalsessao, horaespetaculo, Periodicidade.SEMANAL);
+		
+		Assert.assertEquals(9, sessoes.get(0).getInicio().getDayOfMonth());
+		Assert.assertEquals(16, sessoes.get(1).getInicio().getDayOfMonth());
+		
 	}
 	
 	
